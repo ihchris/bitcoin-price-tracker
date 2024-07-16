@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Price Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cryptocurrency Price Tracker</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price (USD)</th>
+                    <th>24h Change (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for crypto in cryptocurrencies %}
+                    <tr>
+                        <td>{{ crypto['name'] }}</td>
+                        <td>{{ crypto['symbol'] }}</td>
+                        <td>${{ '{:,.2f}'.format(crypto['quote']['USD']['price']) }}</td>
+                        <td>{{ '{:.2f}'.format(crypto['quote']['USD']['percent_change_24h']) }}%</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
